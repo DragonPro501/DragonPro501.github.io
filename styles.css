@@ -1,0 +1,408 @@
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: white;
+  transition: background-color 1s ease-in-out, position 0.5s ease;
+  display: flex; /* Para centrar verticalmente */
+  align-items: center; /* Centrar hijos en el eje Y */
+  justify-content: center; /* Centrar hijos en el eje X */
+}
+
+/* Fondo animado */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.5), rgba(255, 0, 255, 0.5));
+  animation: backgroundAnimation 5s infinite alternate;
+  z-index: -1;
+}
+
+/* Animación del fondo */
+@keyframes backgroundAnimation {
+  0% {
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.5), rgba(255, 0, 255, 0.5));
+  }
+  100% {
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.5), rgba(255, 182, 193, 0.5));
+  }
+}
+
+/* Contenedores con posición fija */
+#login-container, #loading-container, #content-header {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%; /* Adapta al ancho de pantalla */
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  overflow-y: auto; /* Habilita scroll dentro de los div grandes */
+  transition: opacity 1s ease, transform 1s ease;
+  font-size: 15px;
+}
+.hidden
+{
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.visible
+{
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+#login-container p
+{
+  margin-bottom: 20px;
+  padding: 20px;
+}
+#content-header img
+{
+  width: 70%;
+}
+
+/* Botón */
+button {
+  background: #ff66b2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
+
+button:hover {
+  background: #e65c9c;
+}
+
+/* Contenedor final */
+#content-container {
+  display: none;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Campos de texto */
+input[type="text"], input[type="password"] {
+  display: block;
+  width: calc(60% - 40px); /* Respeta márgenes laterales */
+  max-width: 400px; /* Ancho máximo para laptops */
+  padding: 10px;
+  margin: 10px auto;
+  border: 1px solid #ff66b2;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  text-align: center;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  border-color: #e65c9c;
+}
+
+/* Título fijo en la parte superior */
+#fixed-title {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 70%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: center;
+}
+
+/* Botón ajustado para resoluciones */
+.change-button {
+  display: block;
+  margin: 20px auto; /* Espacio superior e inferior, centrado horizontal */
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.change-button:hover {
+  background: #45a049;
+}
+
+/* Contenido adicional */
+#scroll-content.visible {
+  display: block;
+  opacity: 1;
+}
+/* General para scroll-content */
+#scroll-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 235, 205, 0.8); /* Fondo beige semitransparente */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  animation: fadeIn 1s ease;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto centrado */
+#scroll-content p {
+  overflow-y: scroll;
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  z-index: 10; /* Encima de las imágenes */
+  padding: 10px 10px;
+  background: #fff; /* Fondo blanco para destacar */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor de imágenes */
+.images-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Deshabilitar interacción con las imágenes */
+}
+
+/* Imágenes estilo pegatina */
+.sticker {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: rotate(calc(var(--rotate-angle) * 1deg)) scale(1.1);
+  animation: floating 3s infinite ease-in-out;
+  opacity: 0.9;
+  overflow: auto;
+}
+
+/* Imágenes distribuidas en los bordes */
+/* Borde superior */
+.sticker:nth-child(1) { top: 5%; left: 5%; --rotate-angle: -10; }
+.sticker:nth-child(2) { top: 5%; left: 20%; --rotate-angle: 15; }
+.sticker:nth-child(3) { top: 5%; left: 40%; --rotate-angle: -5; }
+.sticker:nth-child(4) { top: 5%; left: 60%; --rotate-angle: 10; }
+.sticker:nth-child(5) { top: 5%; left: 80%; --rotate-angle: -20; }
+
+/* Borde inferior */
+.sticker:nth-child(6) { bottom: 5%; left: 5%; --rotate-angle: 20; }
+.sticker:nth-child(7) { bottom: 5%; left: 20%; --rotate-angle: -15; }
+.sticker:nth-child(8) { bottom: 5%; left: 40%; --rotate-angle: 5; }
+.sticker:nth-child(9) { bottom: 5%; left: 60%; --rotate-angle: -25; }
+.sticker:nth-child(10) { bottom: 5%; left: 80%; --rotate-angle: 15; }
+
+/* Borde izquierdo */
+.sticker:nth-child(11) { top: 10%; left: 5%; --rotate-angle: -10; }
+.sticker:nth-child(12) { top: 30%; left: 5%; --rotate-angle: 20; }
+.sticker:nth-child(13) { top: 50%; left: 5%; --rotate-angle: -5; }
+.sticker:nth-child(14) { top: 70%; left: 5%; --rotate-angle: 15; }
+
+/* Borde derecho */
+.sticker:nth-child(15) { top: 10%; right: 5%; --rotate-angle: 10; }
+.sticker:nth-child(16) { top: 30%; right: 5%; --rotate-angle: -20; }
+.sticker:nth-child(17) { top: 50%; right: 5%; --rotate-angle: 5; }
+.sticker:nth-child(18) { top: 70%; right: 5%; --rotate-angle: -15; }
+
+/* Imágenes distribuidas en el centro */
+.sticker:nth-child(19) { top: 25%; left: 25%; --rotate-angle: 10; }
+.sticker:nth-child(20) { top: 25%; left: 50%; --rotate-angle: -10; }
+.sticker:nth-child(21) { top: 25%; left: 75%; --rotate-angle: 15; }
+.sticker:nth-child(22) { top: 50%; left: 25%; --rotate-angle: -5; }
+.sticker:nth-child(23) { top: 50%; left: 65%; --rotate-angle: 20; }
+.sticker:nth-child(24) { top: 65%; left: 45%; --rotate-angle: -20; }
+.sticker:nth-child(25) { top: 66%; left: 25%; --rotate-angle: 25; }
+
+
+/* Efecto flotante de las imágenes */
+@keyframes floating {
+  0%, 100% { transform: translateY(0) rotate(calc(var(--rotate-angle) * 1deg)); }
+  50% { transform: translateY(-10px) rotate(calc(var(--rotate-angle) * 1deg)); }
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fondo oscuro detrás del texto */
+#dark-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Oscurece el fondo */
+  display: none; /* Oculto inicialmente */
+  z-index: 4;
+}
+
+/* Contenedor del texto */
+#text-container {
+  position: fixed;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  display: none; /* Oculto inicialmente */
+  opacity: 0;
+  z-index: 5; /* Encima del fondo oscuro */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#text-container p{
+  width: 95%;
+}
+/* Mostrar el contenedor con animación */
+#text-container.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Botón en la parte inferior derecha */
+#show-text-button {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+#show-text-button:hover {
+  background-color: #e64a19;
+}
+
+/* Botón de cerrar */
+#close-text-button {
+  display: block;
+  margin: 20px auto 0 auto;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #ff1744;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#close-text-button:hover {
+  background-color: #d50000;
+}
+
+/* Contenedor para la imagen ampliada */
+#image-viewer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Oculto inicialmente */
+  z-index: 7;
+}
+
+#expanded-image {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón para cerrar la imagen */
+#close-image-button {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: #ff1744;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ 
+}
+
+#close-image-button:hover {
+  background-color: #d50000;
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+  #login-container, #loading-container, #content-header {
+    max-width: 600px; /* Ancho más controlado en laptops */
+    max-height: 80vh;
+    font-size: 25px;
+  }
+
+  input[type="text"], input[type="password"] {
+    max-width: 600px;
+  }
+#fixed-title
+{
+  font-size: 55px;
+}
+  .sticker {
+    width: 100px;
+    height: 100px;
+  }
+  .change-button {
+    width: 90%; /* Botón más ancho en móviles */
+    font-size: 22px; /* Texto más pequeño */
+  }
+  
+}
+@media (max-width: 798px) {
+  .change-button {
+    width: 90%; /* Botón más ancho en móviles */
+    font-size: 14px; /* Texto más pequeño */
+  }
+  .sticker {
+    width: 50px;
+    height: 50px;
+  }
+}

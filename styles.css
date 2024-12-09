@@ -22,7 +22,7 @@ body::before {
   height: 100%;
   background: radial-gradient(circle, rgba(255, 182, 193, 0.5), rgba(255, 0, 255, 0.5));
   animation: backgroundAnimation 5s infinite alternate;
-  z-index: -1;
+  z-index: -2;
 }
 
 /* Animación del fondo */
@@ -49,7 +49,7 @@ body::before {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   overflow-y: auto; /* Habilita scroll dentro de los div grandes */
-  transition: opacity 1s ease, transform 1s ease;
+  
   font-size: 15px;
 }
 .hidden
@@ -252,10 +252,19 @@ input[type="text"]:focus, input[type="password"]:focus {
   50% { transform: translateY(-10px) rotate(calc(var(--rotate-angle) * 1deg)); }
 }
 
-/* Animación de aparición */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease forwards;
 }
 
 /* Fondo oscuro detrás del texto */
@@ -370,11 +379,19 @@ input[type="text"]:focus, input[type="password"]:focus {
 #close-image-button:hover {
   background-color: #d50000;
 }
-
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permitir clics a través del canvas */
+  z-index: 50; /* Asegurar que esté al frente */
+}
 /* Responsive Design */
 @media (min-width: 1024px) {
   #login-container, #loading-container, #content-header {
-    max-width: 600px; /* Ancho más controlado en laptops */
+    max-width: 800px; /* Ancho más controlado en laptops */
     max-height: 80vh;
     font-size: 25px;
   }

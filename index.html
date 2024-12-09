@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Holabuenas</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   </head>
   <body>
     <!-- Inicio de sesión -->
@@ -19,10 +20,10 @@
     </div>
 
     <!-- Mensaje de carga -->
-    <div id="loading-container" style="display: none;" class="hidden2">
+    <div id="loading-container" style="display: none;">
       <p>Cargando... <br /> En unos momentos sale la vaina</p>
     </div>
-
+<canvas id="confetti-canvas"></canvas>
 <!-- Contenido final -->
 <div id="content-container">
   <!-- Título y bienvenida -->
@@ -71,12 +72,10 @@
     
   </div>
   
-  <button id="show-text-button">Mostrar Texto</button>
+  <button id="show-text-button">Ver mensaje</button>
   <!-- Contenedor del texto -->
   <div id="text-container">
-    <p id="text-content">PD: Si no te has dado cuenta, puedes dar clic a cada una de las imágenes que hay en el contenido, para así verlas a mejor tamaño.
-    
-    <br /><br />Supongo que ya presenciaste todas las imágenes del contenido que he integrado, dando a conocer los bonitos recuerdos y experiencias que, tanto tú como yo, hemos vivido
+    <p id="text-content">Supongo que ya presenciaste todas las imágenes del contenido que he integrado, dando a conocer los bonitos recuerdos y experiencias que, tanto tú como yo, hemos vivido
     <br /><br /> ¿Qué busco yo con darte esto?
     <br />El propósito de mostrarte esta pequeña galería, es para dar una demostración de lo que vales en esta vida, lo importante que has llegado ser y que serás mucho más conforme pasa el tiempo: siendo una chica alegre, sociable, dramática (para intentar dar un mejor ambiente), empática... Es mucho qué describir que no cabe en este cuadro de texto xd
     <br />En sí, he conservado estas imágenes como recordatorio de lo que se vive, dándome a entender todo lo que he experimentado y aprendido a lo largo del tiempo que llevamos de amistad, en todas esas veces que, sabiendo como es mi carácter, siempre estabas allí, dándome una manito, apoyando en lo que esté a tu favor, intentando darme mejores ánimos con tu presencia y alegría que conmueve... ¿Qué más puedo pedir?
